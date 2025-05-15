@@ -29,6 +29,8 @@ boxes.forEach((box)=>{
         }else{
             box.innerText="X";
             turn0=true;
+            box.style.color="purple";
+            // box.innerText.style.color="purple";
         }
         box.disabled = true;
 
@@ -38,7 +40,7 @@ boxes.forEach((box)=>{
 const disableBoxes =()=>{
     for(let box of boxes){
         box.disabled = true;
-    }
+    }    
 };
 const enableBoxes =()=>{
     for(let box of boxes){
@@ -62,8 +64,24 @@ const checkWinner = () =>{
                 
 
                 showWinner(pos1Val);
+                return true;
             }
         }
+    }
+    return false;
+};
+
+const checkDraw =()=>{
+    let isDraw =true;
+    for(let box of boxes){
+        if(box.innerText ===""){
+            isDraw = false;
+        }
+    }
+    if(isDraw){
+        msg.innerText ="Match Draw";
+        msgContainer.classList.remove("hide");
+        disableBoxes();
     }
 };
 newGameBtn.addEventListener("click",resetGame);
